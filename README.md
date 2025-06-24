@@ -21,7 +21,50 @@ Um dashboard moderno para gerenciamento de turmas, análise de desempenho de alu
 
 ## 📁 Estrutura do Projeto
 
-```
+```# Simulador de Provas - Zé da Gota Solutions
+
+Uma plataforma de estudos desenvolvida para ajudar estudantes do ensino fundamental e médio a se prepararem para provas, oferecendo simulados interativos e relatórios de desempenho detalhados. O projeto também fornece um dashboard para que professores possam acompanhar o progresso de suas turmas.
+
+**Status do Projeto:** 🟢 Em Desenvolvimento - Sprint 2
+
+---
+
+## 🎯 Conceito do Projeto
+
+O objetivo é criar uma solução para as principais dores de estudantes e professores no ensino básico. A plataforma busca oferecer um feedback de desempenho útil e direcionado para os alunos e, ao mesmo tempo, fornecer aos professores métricas consolidadas para identificar lacunas de aprendizagem e orientar suas aulas.
+
+## ✨ Funcionalidades Planejadas
+
+### Para Alunos
+- [ ] Realizar Simulados por matéria.
+- [ ] Visualizar relatório de desempenho detalhado após cada simulado.
+- [ ] Receber recomendações de estudo personalizadas.
+
+### Para Professores
+- [ ] Acessar dashboard consolidado do desempenho da turma.
+- [ ] Analisar as principais dificuldades dos alunos.
+
+### Funcionalidades do Sistema
+- [X] Cadastro e gerenciamento (CRUD) de questões de múltipla escolha.
+- [ ] Correção automática dos simulados.
+
+## 🛠️ Tecnologias Utilizadas
+
+A arquitetura do projeto é dividida em back-end e front-end.
+
+### Back-end
+* **Python com FastAPI:** Para a construção da API REST.
+* **SQLAlchemy:** ORM para comunicação com o banco de dados.
+* **SQLite / PostgreSQL:** Banco de dados relacional.
+* **Pytest:** Para testes automatizados da API.
+
+### Front-end
+* **React:** Biblioteca para construção da interface do usuário.
+* **Vite:** Ferramenta de build e servidor de desenvolvimento.
+* **Material-UI:** Biblioteca de componentes para a interface.
+* **Axios:** Para realizar chamadas à API.
+
+## 📁 Estrutura do Projeto
 src/
 ├── components/          # Componentes reutilizáveis
 │   ├── Calendario.jsx   # Cronograma e avisos
