@@ -123,14 +123,20 @@ Gerenciamento de questões dos simulados.
     ```
 -   **Resposta de Sucesso (201 Created):** `Question` (incluindo o ID da nova questão).
 
-#### `GET /external/search`
+#### `GET /external/search/{year}`
 
--   **Descrição:** Simula uma busca por questões em uma fonte externa.
+-   **Descrição:** Busca questões em tempo real na API pública do ENEM (`api.enem.dev`) para um ano específico. As questões retornadas são automaticamente convertidas para o formato interno da nossa aplicação.
 -   **Autenticação:** Não requerida.
--   **Query Params:**
-    -   `subject` (string, opcional): Filtra por matéria.
-    -   `year` (int, opcional): Filtra por ano (atualmente não implementado na lógica mockada).
--   **Resposta de Sucesso (200 OK):** Lista de `Question`.
+-   **Parâmetros de Caminho (Path):**
+    -   `year` (integer, **obrigatório**): O ano da prova do ENEM a ser pesquisada.
+-   **Parâmetros de Query:**
+    -   `discipline` (string, opcional): Filtra as questões por uma disciplina específica (ex: `matematica`, `linguagens`).
+    -   `limit` (integer, opcional): Limita o número de questões retornadas. Padrão: 10.
+-   **Exemplos de Uso:**
+    -   `.../questions/external/search/2022`
+    -   `.../questions/external/search/2021?discipline=matematica&limit=5`
+-   **Resposta de Sucesso (200 OK):** Uma lista de questões no formato interno da aplicação (`QuestionCreate`).
+
 
 ---
 
