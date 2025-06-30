@@ -71,3 +71,26 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     email: Optional[str] = None
+
+from typing import List, Optional
+
+class ExternalAlternative(BaseModel):
+    letter: str
+    text: Optional[str] = None
+    file: Optional[str] = None
+    isCorrect: bool
+
+class ExternalQuestion(BaseModel):
+    title: str
+    index: int
+    discipline: str
+    language: Optional[str] = None
+    year: int
+    context: str
+    files: List[str] = []
+    correctAlternative: str
+    alternativesIntroduction: Optional[str] = None
+    alternatives: List[ExternalAlternative]
+
+class EnemApiResponse(BaseModel):
+    questions: List[ExternalQuestion]
