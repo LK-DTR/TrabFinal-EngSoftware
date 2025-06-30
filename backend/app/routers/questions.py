@@ -43,33 +43,29 @@ def create_new_question(
 async def search_external_questions(
     year: int,
     discipline: Optional[str] = None,
-    limit: int = Query(10, ge=1, le=100) # Limite padrão de 10, máximo de 100
+    limit: int = Query(10, ge=1, le=100)
 ):
     """
     Busca questões na API pública do ENEM para um ano específico e as converte
     para o formato interno da nossa aplicação.
     """
     API_URL = f"https://api.enem.dev/v1/exams/{year}/questions"
-    params = {"limit": 180} # A prova tem 180 questões, vamos buscar todas
+    params = {"limit": 50}
 
     try:
-        # Usamos 'async with' para gerenciar o ciclo de vida do cliente HTTP
         async with httpx.AsyncClient() as client:
             response = await client.get(API_URL, params=params, timeout=30.0)
             
             # Lança uma exceção para respostas com erro (4xx ou 5xx)
             response.raise_for_status()
 
-            # Valida a resposta da API usando nosso schema Pydantic
             validated_data = schemas.EnemApiResponse.parse_obj(response.json())
             
-            # Mapeia cada questão recebida para o nosso formato interno
             mapped_questions = [
                 map_enem_question_to_internal_schema(q) 
                 for q in validated_data.questions
             ]
 
-            # Filtra pela disciplina, se o parâmetro foi fornecido
             if discipline:
                 filtered_questions = [
                     q for q in mapped_questions 
@@ -78,8 +74,21 @@ async def search_external_questions(
             else:
                 filtered_questions = mapped_questions
             
-            # Retorna apenas a quantidade definida pelo parâmetro 'limit'
             return filtered_questions[:limit]
+
+    # --- BLOCO DE ERRO MELHORADO ---
+    except httpx.HTTPStatusError as exc:
+        # Captura erros de status HTTP, como 400, 404, 500 da API externa
+        if exc.response.status_code == 400 or exc.response.status_code == 404:
+            raise HTTPException(
+                status_code=404, 
+                detail=f"Não foram encontradas questões para o ano de {year} na API externa."
+            )
+        else:
+            raise HTTPException(
+                status_code=503, # Service Unavailable
+                detail=f"A API do ENEM retornou um erro inesperado: {exc.response.status_code}"
+            )
 
     except httpx.RequestError as exc:
         # Captura erros de conexão, timeout, etc.
@@ -89,4 +98,4 @@ async def search_external_questions(
         )
     except Exception as e:
         # Captura outros erros, como falha na validação do Pydantic
-        raise HTTPException(status_code=500, detail=f"Ocorreu um erro interno: {e}")
+        raise HTTPException(status_code=500, detail=f"Ocorreu um erro interno ao processar os dados: {e}")
