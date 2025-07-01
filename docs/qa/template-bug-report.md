@@ -32,6 +32,7 @@
 - [ ] Gerenciamento de Questões
 - [ ] API Backend
 - [ ] Interface Geral
+- [ ] Integração API Externa (ENEM)
 
 ## 🔍 Descrição Detalhada
 
@@ -104,6 +105,8 @@
 
 ### Endpoints da API Envolvidos
 [Se aplicável, listar endpoints relacionados]
+- Interno: [ex: POST /questions, GET /simulados]
+- Externo: [ex: api.enem.dev/questions/2022]
 
 ### Mensagens de Erro
 [Transcrever mensagens de erro exatas]
@@ -178,4 +181,4 @@
 ---
 
 **Template criado por:** Lucas Cordeiro Dutra (QA)  
-**Última atualização:** Junho 2025
+**Última atualização:** Julho 2025

@@ -1,0 +1,516 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Configuração da página
+\geometry{left=3cm,right=2cm,top=3cm,bottom=2cm}
+
+% Configuração do código
+\lstset{
+    backgroundcolor=\color{gray!10},
+    basicstyle=\footnotesize\ttfamily,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    commentstyle=\color{green!50!black},
+    frame=single,
+    keepspaces=true,
+    keywordstyle=\color{blue},
+    language=Python,
+    numbers=left,
+    numbersep=5pt,
+    numberstyle=\tiny\color{gray},
+    rulecolor=\color{black},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    stringstyle=\color{red},
+    tabsize=2
+}
+
+% Configuração de hyperlinks
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={Relatório Técnico - Simulador de Provas},
+    pdfauthor={Zé da Gota Solutions},
+    pdfsubject={Engenharia de Software},
+    pdfkeywords={Python, React, FastAPI, Educação, Simulados}
+}
+
+\begin{document}
+
+% Página de título
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    {\LARGE\textbf{RELATÓRIO TÉCNICO}}\\[0.5cm]
+    {\Large\textbf{SIMULADOR DE PROVAS}}\\[0.3cm]
+    {\large Zé da Gota Solutions}\\[2cm]
+    
+    {\large\textbf{Plataforma de Estudos Interativa para Ensino Básico}}\\[1cm]
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.3\textwidth]{logo_placeholder.png}
+        \caption*{Logo do Projeto}
+    \end{figure}
+    
+    \vfill
+    
+    {\large
+    \textbf{Disciplina:} Engenharia de Software\\
+    \textbf{Data:} \today\\
+    \textbf{Versão:} 2.0\\
+    \textbf{Status:} Em Desenvolvimento - Sprint 2
+    }
+    
+\end{titlepage}
+
+\newpage
+
+% Sumário
+\tableofcontents
+\newpage
+
+% Resumo Executivo
+\section{Resumo Executivo}
+
+O Simulador de Provas é uma plataforma web desenvolvida para auxiliar estudantes do ensino fundamental e médio na preparação para avaliações, oferecendo simulados interativos e relatórios de desempenho detalhados. O sistema também fornece ferramentas para professores acompanharem o progresso de suas turmas.
+
+\subsection{Objetivos Principais}
+\begin{itemize}
+    \item Criar uma solução completa para preparação de provas
+    \item Oferecer feedback personalizado de desempenho
+    \item Fornecer métricas consolidadas para professores
+    \item Implementar interface intuitiva e responsiva
+\end{itemize}
+
+\subsection{Principais Resultados}
+\begin{itemize}
+    \item Sistema de autenticação JWT implementado
+    \item Interface de simulados com cronômetro automático
+    \item API REST completa com FastAPI
+    \item Relatórios de desempenho em tempo real
+    \item Plano de testes abrangente documentado
+\end{itemize}
+
+\section{Arquitetura do Sistema}
+
+\subsection{Visão Geral}
+O sistema adota uma arquitetura de três camadas com separação clara entre frontend, backend e banco de dados, seguindo princípios de engenharia de software moderna.
+
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Frontend} & \textbf{Backend} & \textbf{Database} \\
+        \hline
+        React 18.3.1 & FastAPI & SQLite \\
+        Chakra UI & SQLAlchemy & Modelos relacionais \\
+        Vite & JWT Auth & Persistência local \\
+        \hline
+    \end{tabular}
+    \caption{Arquitetura em três camadas}
+\end{figure}
+
+\subsection{Stack Tecnológica}
+
+\subsubsection{Backend}
+\begin{itemize}
+    \item \textbf{FastAPI:} Framework web moderno para Python com documentação automática
+    \item \textbf{SQLAlchemy:} ORM para mapeamento objeto-relacional
+    \item \textbf{SQLite:} Banco de dados relacional leve
+    \item \textbf{JWT (python-jose):} Autenticação segura baseada em tokens
+    \item \textbf{Passlib:} Biblioteca para hash de senhas com bcrypt
+    \item \textbf{Pydantic:} Validação de dados e serialização
+    \item \textbf{Uvicorn:} Servidor ASGI de alta performance
+\end{itemize}
+
+\subsubsection{Frontend}
+\begin{itemize}
+    \item \textbf{React 18.3.1:} Biblioteca para construção de interfaces
+    \item \textbf{Chakra UI:} Sistema de componentes modular
+    \item \textbf{Framer Motion:} Biblioteca para animações
+    \item \textbf{Axios:} Cliente HTTP para comunicação com API
+    \item \textbf{Vite:} Build tool otimizada com HMR
+    \item \textbf{ESLint:} Ferramenta de linting para qualidade de código
+\end{itemize}
+
+\subsubsection{Integrações Externas}
+\begin{itemize}
+    \item \textbf{API do ENEM:} Integração com \texttt{api.enem.dev} para questões reais
+    \item \textbf{Conversão automática:} Transformação de dados externos para formato interno
+    \item \textbf{Filtros avançados:} Busca por ano, disciplina e limite de questões
+    \item \textbf{Cache local:} Armazenamento temporário de questões importadas
+\end{itemize}
+
+\section{Funcionalidades Implementadas}
+
+\subsection{Módulo do Aluno}
+\begin{enumerate}
+    \item \textbf{Autenticação JWT:} Sistema seguro de login e autorização
+    \item \textbf{Seleção de Simulados:} Interface com filtros por matéria, instituição e dificuldade
+    \item \textbf{Execução de Simulados:} Cronômetro automático com finalização por tempo
+    \item \textbf{Navegação entre Questões:} Sistema de navegação livre durante o simulado
+    \item \textbf{Correção Automática:} Processamento e cálculo de pontuação em tempo real
+    \item \textbf{Histórico Detalhado:} Registro completo de simulados realizados
+    \item \textbf{Relatórios de Performance:} Estatísticas de acertos, erros e tempo gasto
+\end{enumerate}
+
+\subsection{Módulo do Professor}
+\begin{enumerate}
+    \item \textbf{Dashboard de Acompanhamento:} Visão geral do desempenho das turmas
+    \item \textbf{CRUD de Questões:} Criação, edição e exclusão de questões
+    \item \textbf{Análise por Matéria:} Relatórios específicos por disciplina
+    \item \textbf{Gestão de Simulados:} Configuração e distribuição de avaliações
+    \item \textbf{Integração API ENEM:} Importação de questões reais via \texttt{api.enem.dev}
+\end{enumerate}
+
+\section{Modelagem de Dados}
+
+\subsection{Modelo Entidade-Relacionamento}
+
+O banco de dados foi modelado com quatro entidades principais:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Entidade} & \textbf{Atributos Principais} & \textbf{Relacionamentos} \\
+\hline
+User & id, email, hashed\_password, role & 1:N com Simulado \\
+\hline
+Question & id, question\_text, options, correct\_answer & N:M com Simulado \\
+\hline
+Simulado & id, user\_id, status, timestamp\_inicio & N:1 com User, 1:1 com Resultado \\
+\hline
+Resultado & id, simulado\_id, score, answers, timestamp\_fim & 1:1 com Simulado \\
+\hline
+\end{tabular}
+\caption{Estrutura das principais entidades}
+\end{table}
+
+\subsection{Modelo de Dados JSON}
+As questões utilizam estrutura JSON para armazenar opções de múltipla escolha:
+
+\begin{lstlisting}[language=json, caption=Estrutura de uma questão]
+{
+  "id": 1,
+  "question_text": "Qual é a capital do Brasil?",
+  "options": {
+    "A": "São Paulo",
+    "B": "Rio de Janeiro", 
+    "C": "Brasília",
+    "D": "Salvador",
+    "E": "Belo Horizonte"
+  },
+  "correct_answer": "C",
+  "subject": "Geografia"
+}
+\end{lstlisting}
+
+\section{API REST}
+
+\subsection{Endpoints Principais}
+
+\subsubsection{Autenticação}
+\begin{itemize}
+    \item \texttt{POST /auth/token} - Login e geração de token JWT
+    \item \texttt{POST /auth/register} - Registro de novos usuários
+\end{itemize}
+
+\subsubsection{Simulados}
+\begin{itemize}
+    \item \texttt{GET /simulados} - Listar simulados disponíveis
+    \item \texttt{POST /simulados} - Criar novo simulado
+    \item \texttt{POST /simulados/\{id\}/submit} - Enviar respostas
+    \item \texttt{GET /simulados/\{id\}/result} - Obter resultado
+\end{itemize}
+
+\subsubsection{Questões}
+\begin{itemize}
+    \item \texttt{GET /questions} - Listar questões
+    \item \texttt{POST /questions} - Criar nova questão
+    \item \texttt{PUT /questions/\{id\}} - Atualizar questão
+    \item \texttt{DELETE /questions/\{id\}} - Deletar questão
+    \item \texttt{GET /questions/external/search/\{year\}} - Buscar questões do ENEM
+\end{itemize}
+
+\subsubsection{Integração com API Externa}
+\begin{itemize}
+    \item \textbf{API do ENEM:} Integração com \texttt{api.enem.dev} para busca de questões reais
+    \item \textbf{Parâmetros:} Ano obrigatório, disciplina e limite opcionais
+    \item \textbf{Conversão automática:} Questões convertidas para formato interno
+    \item \textbf{Exemplo:} \texttt{/questions/external/search/2022?discipline=matematica\&limit=5}
+\end{itemize}
+
+\subsection{Documentação Automática}
+A API utiliza FastAPI para gerar documentação automática em \texttt{/docs} seguindo o padrão OpenAPI 3.0.
+
+\subsection{Exemplo de Integração com API Externa}
+A integração com a API do ENEM permite importar questões reais:
+
+\begin{lstlisting}[language=bash, caption=Exemplos de uso da API do ENEM]
+# Buscar 10 questões de 2022 (limite padrão)
+GET /questions/external/search/2022
+
+# Buscar 5 questões de matemática de 2021
+GET /questions/external/search/2021?discipline=matematica&limit=5
+
+# Buscar questões de linguagens de 2020
+GET /questions/external/search/2020?discipline=linguagens
+\end{lstlisting}
+
+\section{Interface do Usuário}
+
+\subsection{Design System}
+\begin{itemize}
+    \item \textbf{Paleta de Cores:} Tema azul corporativo (\texttt{blue.800}, \texttt{blue.600})
+    \item \textbf{Tipografia:} Fontes system padrão para melhor legibilidade
+    \item \textbf{Componentes:} Chakra UI para consistência visual
+    \item \textbf{Responsividade:} Layout adaptável para mobile e desktop
+\end{itemize}
+
+\subsection{Componentes Principais}
+\begin{enumerate}
+    \item \textbf{LoginPage:} Autenticação com validação em tempo real
+    \item \textbf{SimuladoSelectionPage:} Lista e filtros de simulados disponíveis
+    \item \textbf{QuestionPage:} Interface do simulado com cronômetro e navegação
+    \item \textbf{HistoryPage:} Histórico detalhado com métricas de performance
+\end{enumerate}
+
+\section{Qualidade e Testes}
+
+\subsection{Estratégia de Testes}
+O projeto implementa uma estratégia abrangente de testes documentada em \texttt{docs/qa/plano-de-testes.md}:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Tipo de Teste} & \textbf{Cobertura} & \textbf{Status} \\
+\hline
+Funcionais & Fluxos principais & Planejado \\
+Interface & Componentes React & Planejado \\
+API & Endpoints REST & Planejado \\
+Performance & Tempos de resposta & Definido \\
+Segurança & Autenticação/Autorização & Planejado \\
+Responsividade & Mobile/Desktop & Planejado \\
+\hline
+\end{tabular}
+\caption{Tipos de teste implementados}
+\end{table}
+
+\subsection{Histórias de Usuário}
+\begin{itemize}
+    \item \textbf{HU1:} Como aluno, quero realizar simulados por matéria
+    \item \textbf{HU2:} Como aluno, quero visualizar relatório de desempenho detalhado
+    \item \textbf{HU3:} Como professor, quero acessar dashboard consolidado
+\end{itemize}
+
+\subsection{Critérios de Performance}
+\begin{itemize}
+    \item Carregamento inicial: < 3 segundos
+    \item Geração de relatórios: < 3 segundos
+    \item Correção automática: < 1 segundo
+\end{itemize}
+
+\section{Segurança}
+
+\subsection{Medidas Implementadas}
+\begin{enumerate}
+    \item \textbf{Autenticação JWT:} Tokens seguros com expiração configurável
+    \item \textbf{Hash de Senhas:} Utilização de bcrypt via Passlib
+    \item \textbf{Validação de Dados:} Schemas Pydantic para entrada de dados
+    \item \textbf{Proteção de Rotas:} Middleware de autorização no backend
+    \item \textbf{CORS:} Configuração adequada para desenvolvimento
+\end{enumerate}
+
+\subsection{Boas Práticas}
+\begin{itemize}
+    \item Princípio do menor privilégio para usuários
+    \item Sanitização de entradas do usuário
+    \item Logs de segurança para auditoria
+    \item Ambiente de desenvolvimento isolado
+\end{itemize}
+
+\section{Metodologia de Desenvolvimento}
+
+\subsection{Processo de Desenvolvimento}
+O projeto segue metodologia ágil com sprints de 2 semanas:
+
+\begin{itemize}
+    \item \textbf{Sprint 1:} Configuração inicial e autenticação
+    \item \textbf{Sprint 2:} Implementação de simulados e interface
+    \item \textbf{Sprint 3:} Dashboard do professor e relatórios avançados
+    \item \textbf{Sprint 4:} Testes automatizados e deploy
+\end{itemize}
+
+\subsection{Controle de Versão}
+\begin{itemize}
+    \item Git com workflow feature-branch
+    \item Commits semânticos seguindo convenção
+    \item Pull requests com revisão de código
+    \item Documentação versionada junto ao código
+\end{itemize}
+
+\section{Métricas e Resultados}
+
+\subsection{Métricas de Código}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|r|l|}
+\hline
+\textbf{Métrica} & \textbf{Valor} & \textbf{Tecnologia} \\
+\hline
+Linhas de código Python & $\sim$800 & Backend FastAPI \\
+Linhas de código JavaScript & $\sim$1200 & Frontend React \\
+Componentes React & 4 & Interface principal \\
+Endpoints API & 8 & Serviços REST \\
+Modelos de dados & 4 & SQLAlchemy \\
+\hline
+\end{tabular}
+\caption{Métricas quantitativas do projeto}
+\end{table}
+
+\subsection{Funcionalidades Entregues}
+\begin{itemize}
+    \item ✅ Sistema completo de autenticação
+    \item ✅ Interface de simulados funcional
+    \item ✅ API REST documentada
+    \item ✅ Banco de dados estruturado
+    \item ✅ Relatórios de desempenho
+    \item 🔄 Dashboard do professor (em desenvolvimento)
+\end{itemize}
+
+\section{Próximos Passos}
+
+\subsection{Sprint 3 - Funcionalidades Avançadas}
+\begin{itemize}
+    \item Dashboard completo do professor
+    \item Relatórios gráficos com Chart.js
+    \item Sistema de recomendações personalizadas
+    \item Exportação de relatórios em PDF
+\end{itemize}
+
+\subsection{Sprint 4 - Qualidade e Deploy}
+\begin{itemize}
+    \item Testes automatizados com Jest/Pytest
+    \item CI/CD com GitHub Actions
+    \item Deploy em produção (Heroku/Vercel)
+    \item Documentação completa da API
+\end{itemize}
+
+\subsection{Melhorias Futuras}
+\begin{itemize}
+    \item Integração com APIs externas de questões
+    \item Sistema de notificações push
+    \item Modo offline para simulados
+    \item Análise de desempenho com IA
+\end{itemize}
+
+\section{Conclusões}
+
+\subsection{Objetivos Alcançados}
+O projeto Simulador de Provas atingiu com sucesso seus objetivos principais na Sprint 2, entregando uma plataforma funcional com:
+
+\begin{itemize}
+    \item Sistema de autenticação robusto e seguro
+    \item Interface intuitiva para realização de simulados
+    \item API REST bem estruturada e documentada
+    \item Relatórios de desempenho em tempo real
+    \item Arquitetura escalável e maintível
+\end{itemize}
+
+\subsection{Lições Aprendidas}
+\begin{enumerate}
+    \item A separação clara entre frontend e backend facilitou o desenvolvimento paralelo
+    \item O uso de FastAPI acelerou significativamente a criação da API
+    \item Chakra UI proporcionou consistência visual sem overhead de desenvolvimento
+    \item A documentação contínua é essencial para projetos de engenharia de software
+\end{enumerate}
+
+\subsection{Impacto Esperado}
+A plataforma tem potencial para impactar positivamente:
+\begin{itemize}
+    \item \textbf{Estudantes:} Preparação mais eficiente para provas
+    \item \textbf{Professores:} Insights detalhados sobre desempenho das turmas
+    \item \textbf{Instituições:} Melhoria na qualidade do ensino
+    \item \textbf{Processo educacional:} Personalização do aprendizado
+\end{itemize}
+
+\section{Referências}
+
+\begin{enumerate}
+    \item FastAPI Documentation. \url{https://fastapi.tiangolo.com/}
+    \item React Documentation. \url{https://react.dev/}
+    \item Chakra UI Component Library. \url{https://chakra-ui.com/}
+    \item SQLAlchemy ORM. \url{https://www.sqlalchemy.org/}
+    \item JWT.io - JSON Web Tokens. \url{https://jwt.io/}
+    \item Vite Build Tool. \url{https://vitejs.dev/}
+    \item Pydantic Data Validation. \url{https://pydantic.dev/}
+    \item Python Passlib. \url{https://passlib.readthedocs.io/}
+\end{enumerate}
+
+\appendix
+
+\section{Anexo A - Estrutura de Arquivos}
+
+\begin{lstlisting}[language=bash, caption=Estrutura do projeto]
+TrabFinal-EngSoftware/
+├── backend/
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── database.py
+│   │   ├── models.py
+│   │   ├── schemas.py
+│   │   ├── crud.py
+│   │   └── routers/
+│   │       ├── auth.py
+│   │       ├── questions.py
+│   │       └── simulados.py
+│   └── requirements.txt
+├── simulador_provas/
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── components/
+│   │   └── api/
+│   └── package.json
+└── docs/
+    └── qa/
+        └── plano-de-testes.md
+\end{lstlisting}
+
+\section{Anexo B - Comandos de Execução}
+
+\begin{lstlisting}[language=bash, caption=Setup do backend]
+cd backend
+python -m venv venv
+venv\Scripts\activate  # Windows
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash, caption=Setup do frontend]
+cd simulador_provas
+npm install
+npm run dev
+\end{lstlisting}
+
+\end{document}

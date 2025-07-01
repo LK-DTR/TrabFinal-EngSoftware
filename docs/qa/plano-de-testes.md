@@ -1,6 +1,6 @@
 # 📋 Plano de Testes - Simulador de Provas
-**Versão:** 1.0  
-**Data:** Junho 2025  
+**Versão:** 1.1  
+**Data:** Julho 2025  
 **Responsável:** Lucas Cordeiro Dutra (QA)  
 
 ## 🎯 Objetivo
@@ -216,26 +216,55 @@ Este documento apresenta o plano de testes completo para garantir que todas as f
 **Resultado Esperado:** Questão removida do sistema  
 **Status:** ⏳ Pendente  
 
+#### CT017 - Importação de Questões do ENEM
+**Descrição:** Verificar integração com API externa do ENEM  
+**Pré-condições:** Professor logado, API do ENEM acessível  
+**Passos:**
+1. Acessar "Importar Questões"
+2. Selecionar ano da prova (ex: 2022)
+3. Escolher disciplina (opcional)
+4. Definir limite de questões
+5. Confirmar importação
+
+**Resultado Esperado:** Questões do ENEM importadas e convertidas para formato interno  
+**Status:** ⏳ Pendente  
+
+#### CT018 - Validação de Questões Importadas
+**Descrição:** Verificar integridade das questões importadas da API do ENEM  
+**Pré-condições:** Questões importadas disponíveis  
+**Passos:**
+1. Visualizar questão importada
+2. Verificar estrutura (enunciado, alternativas, resposta correta)
+3. Conferir metadados (disciplina, ano)
+
+**Resultado Esperado:** Questões com estrutura correta e dados precisos  
+**Status:** ⏳ Pendente  
+
 ### 6. Testes de Performance
 
-#### CT017 - Tempo de Carregamento do Dashboard
+#### CT019 - Tempo de Carregamento do Dashboard
 **Descrição:** Verificar performance do carregamento inicial  
 **Critério:** Página deve carregar em até 3 segundos  
 **Status:** ⏳ Pendente  
 
-#### CT018 - Geração de Relatórios
+#### CT020 - Geração de Relatórios
 **Descrição:** Verificar tempo de geração de relatórios  
 **Critério:** Relatórios devem ser gerados em até 3 segundos  
 **Status:** ⏳ Pendente  
 
-#### CT019 - Correção Automática
+#### CT021 - Correção Automática
 **Descrição:** Verificar velocidade da correção de simulados  
 **Critério:** Correção deve ser instantânea (< 1 segundo)  
 **Status:** ⏳ Pendente  
 
+#### CT022 - Performance da API Externa
+**Descrição:** Verificar tempo de resposta da integração com API do ENEM  
+**Critério:** Importação de questões deve ocorrer em até 10 segundos  
+**Status:** ⏳ Pendente  
+
 ### 7. Testes de Responsividade
 
-#### CT020 - Visualização em Mobile
+#### CT023 - Visualização em Mobile
 **Descrição:** Verificar adaptação para dispositivos móveis  
 **Passos:**
 1. Acessar em smartphone (viewport 375px)
@@ -244,7 +273,7 @@ Este documento apresenta o plano de testes completo para garantir que todas as f
 **Resultado Esperado:** Interface adaptada e funcional em mobile  
 **Status:** ⏳ Pendente  
 
-#### CT021 - Visualização em Tablet
+#### CT024 - Visualização em Tablet
 **Descrição:** Verificar adaptação para tablets  
 **Passos:**
 1. Acessar em tablet (viewport 768px)
@@ -255,7 +284,7 @@ Este documento apresenta o plano de testes completo para garantir que todas as f
 
 ### 8. Testes de Segurança
 
-#### CT022 - Proteção de Rotas
+#### CT025 - Proteção de Rotas
 **Descrição:** Verificar controle de acesso a páginas restritas  
 **Passos:**
 1. Tentar acessar dashboard sem login
@@ -264,13 +293,23 @@ Este documento apresenta o plano de testes completo para garantir que todas as f
 **Resultado Esperado:** Redirecionamento para login ou erro de autorização  
 **Status:** ⏳ Pendente  
 
-#### CT023 - Validação de Dados
+#### CT026 - Validação de Dados
 **Descrição:** Verificar sanitização de entradas  
 **Passos:**
 1. Inserir caracteres especiais em formulários
 2. Tentar inserir scripts maliciosos
 
 **Resultado Esperado:** Dados sanitizados e scripts bloqueados  
+**Status:** ⏳ Pendente  
+
+#### CT027 - Segurança da API Externa
+**Descrição:** Verificar tratamento seguro de dados da API do ENEM  
+**Passos:**
+1. Monitorar requisições para api.enem.dev
+2. Verificar validação de dados recebidos
+3. Testar comportamento com respostas malformadas
+
+**Resultado Esperado:** Dados validados e erros tratados adequadamente  
 **Status:** ⏳ Pendente  
 
 ## 📋 Matriz de Rastreabilidade
@@ -281,10 +320,10 @@ Este documento apresenta o plano de testes completo para garantir que todas as f
 | CT004-CT007   | HU1               | Simulados      | Alta       |
 | CT008-CT010   | HU2               | Relatórios     | Alta       |
 | CT011-CT013   | HU3               | Dashboard Prof | Alta       |
-| CT014-CT016   | -                 | CRUD Questões  | Média      |
-| CT017-CT019   | -                 | Performance    | Alta       |
-| CT020-CT021   | -                 | Responsividade | Média      |
-| CT022-CT023   | -                 | Segurança      | Alta       |
+| CT014-CT018   | -                 | CRUD Questões + API ENEM | Alta |
+| CT019-CT022   | -                 | Performance    | Alta       |
+| CT023-CT024   | -                 | Responsividade | Média      |
+| CT025-CT027   | -                 | Segurança      | Alta       |
 
 ## 🚀 Estratégia de Execução
 
