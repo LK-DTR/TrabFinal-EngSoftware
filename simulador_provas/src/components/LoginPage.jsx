@@ -36,22 +36,34 @@ function LoginPage({ onLogin }) {
         }
       );
 
-      const { access_token, token_type } = response.data;
+      const { access_token, token_type, user_role } = response.data;
 
       if (access_token) {
-        // Armazena o token completo (ex: "Bearer seu_token_jwt_aqui")
-        // NOTE: O token está sendo salvo aqui no LoginPage para ser mais direto.
-        // No App.jsx, ele também é salvo via `onLogin` para consistência e clareza.
+        // Salva o token para qualquer tipo de usuário
         localStorage.setItem('userToken', `${token_type} ${access_token}`);
-        localStorage.setItem('userName', username); // Salva o nome de usuário também
+        localStorage.setItem('userName', username); 
 
-        toast({
-          title: "Login bem-sucedido!",
-          status: 'success',
-          duration: 3000,
-          isClosable: true,
-        });
-        onLogin(access_token, username); // Passa o token e o username para o App.jsx
+        // Verifica o papel do usuário para decidir o redirecionamento
+        if (user_role === 'admin') {
+            toast({
+                title: "Login de Administrador bem-sucedido!",
+                description: "Redirecionando para o painel de admin...",
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            });
+            // Redireciona para a página do admin (sim_test)
+            window.location.href = 'http://localhost:5174/'; // <<< URL DO SEU PAINEL DE ADMIN
+        } else {
+            // Lógica para usuários normais (alunos, professores, etc.)
+            toast({
+                title: "Login bem-sucedido!",
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            });
+            onLogin(access_token, username); // Chama a função original para logar no app principal
+        }
       } else {
         toast({
           title: 'Erro no Login',
