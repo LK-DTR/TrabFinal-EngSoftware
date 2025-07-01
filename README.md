@@ -1,29 +1,6 @@
-# Sistema de Gerenciamento Acadêmico para Professores
+# Simulador de Provas - Zé da Gota Solutions
 
-Um dashboard moderno para gerenciamento de turmas, análise de desempenho de alunos e controle de atividades acadêmicas, desenvolvido com React e Vite.
-
-## 🚀 Funcionalidades
-
-- **Perfil do Professor**: Visualização de informações pessoais e cronograma de aulas
-- **Análise de Alunos**: Visualização detalhada do desempenho individual dos estudantes
-- **Análise de Turmas**: Gráficos e relatórios de desempenho geral das turmas
-- **Gerenciamento de Provas**: Agendamento, edição e cancelamento de avaliações
-- **Sistema de Avisos**: Cronograma de eventos e notificações importantes
-- **Troca de Perfis**: Interface multi-usuário para diferentes professores
-
-## 🛠️ Tecnologias Utilizadas
-
-- **React** 19.1.0 - Biblioteca para construção da interface
-- **React Router DOM** - Navegação entre páginas
-- **Vite** - Build tool e servidor de desenvolvimento
-- **CSS3** - Estilização com tema escuro moderno
-- **ESLint** - Linting e qualidade de código
-
-## 📁 Estrutura do Projeto
-
-```# Simulador de Provas - Zé da Gota Solutions
-
-Uma plataforma de estudos desenvolvida para ajudar estudantes do ensino fundamental e médio a se prepararem para provas, oferecendo simulados interativos e relatórios de desempenho detalhados. O projeto também fornece um dashboard para que professores possam acompanhar o progresso de suas turmas.
+Uma plataforma de estudos desenvolvida para ajudar estudantes do ensino fundamental e médio a se prepararem para provas, oferecendo simulados interativos e relatórios de desempenho detalhados. O projeto também fornece uma API robusta para gerenciamento de usuários, questões e resultados.
 
 **Status do Projeto:** 🟢 Em Desenvolvimento - Sprint 2
 
@@ -31,161 +8,288 @@ Uma plataforma de estudos desenvolvida para ajudar estudantes do ensino fundamen
 
 ## 🎯 Conceito do Projeto
 
-O objetivo é criar uma solução para as principais dores de estudantes e professores no ensino básico. A plataforma busca oferecer um feedback de desempenho útil e direcionado para os alunos e, ao mesmo tempo, fornecer aos professores métricas consolidadas para identificar lacunas de aprendizagem e orientar suas aulas.
+O objetivo é criar uma solução completa para as principais dores de estudantes e professores no ensino básico. A plataforma oferece um feedback de desempenho útil e direcionado para os alunos e, ao mesmo tempo, fornece aos professores métricas consolidadas para identificar lacunas de aprendizagem e orientar suas aulas.
 
-## ✨ Funcionalidades Planejadas
+## ✨ Funcionalidades Implementadas
 
 ### Para Alunos
-- [ ] Realizar Simulados por matéria.
-- [ ] Visualizar relatório de desempenho detalhado após cada simulado.
-- [ ] Receber recomendações de estudo personalizadas.
+- ✅ Sistema de autenticação JWT
+- ✅ Seleção e filtros de simulados por matéria, instituição e dificuldade
+- ✅ Realização de simulados com cronômetro automático
+- ✅ Navegação entre questões durante o simulado
+- ✅ Correção automática e cálculo de pontuação
+- ✅ Histórico detalhado de simulados realizados
+- ✅ Relatórios de desempenho com estatísticas
 
 ### Para Professores
-- [ ] Acessar dashboard consolidado do desempenho da turma.
-- [ ] Analisar as principais dificuldades dos alunos.
+- ✅ Dashboard para acompanhamento de turmas
+- ✅ Gerenciamento de questões (CRUD)
+- ✅ Análise de desempenho por matéria
+- 🔄 Dashboard consolidado do desempenho da turma
 
 ### Funcionalidades do Sistema
-- [X] Cadastro e gerenciamento (CRUD) de questões de múltipla escolha.
-- [ ] Correção automática dos simulados.
+- ✅ API REST completa com FastAPI
+- ✅ Autenticação e autorização JWT
+- ✅ Banco de dados SQLite com SQLAlchemy
+- ✅ Interface responsiva com Chakra UI
+- ✅ Cronômetro com finalização automática
+- ✅ Sistema de filtros avançados
 
 ## 🛠️ Tecnologias Utilizadas
 
-A arquitetura do projeto é dividida em back-end e front-end.
+### Backend
+- **FastAPI** - Framework web moderno para Python
+- **SQLAlchemy** - ORM para banco de dados
+- **SQLite** - Banco de dados relacional
+- **JWT (python-jose)** - Autenticação segura
+- **Passlib** - Hash de senhas
+- **Pydantic** - Validação de dados
+- **Uvicorn** - Servidor ASGI
 
-### Back-end
-* **Python com FastAPI:** Para a construção da API REST.
-* **SQLAlchemy:** ORM para comunicação com o banco de dados.
-* **SQLite / PostgreSQL:** Banco de dados relacional.
-* **Pytest:** Para testes automatizados da API.
-
-### Front-end
-* **React:** Biblioteca para construção da interface do usuário.
-* **Vite:** Ferramenta de build e servidor de desenvolvimento.
-* **Material-UI:** Biblioteca de componentes para a interface.
-* **Axios:** Para realizar chamadas à API.
+### Frontend
+- **React 18.3.1** - Biblioteca para construção da interface
+- **Chakra UI** - Biblioteca de componentes
+- **Framer Motion** - Animações e transições
+- **Axios** - Cliente HTTP
+- **Vite** - Build tool e servidor de desenvolvimento
+- **ESLint** - Linting e qualidade de código
 
 ## 📁 Estrutura do Projeto
-src/
-├── components/          # Componentes reutilizáveis
-│   ├── Calendario.jsx   # Cronograma e avisos
-│   ├── ImageModal.jsx   # Modal para expansão de imagens
-│   ├── ProfileSelector.jsx # Seletor de perfil ativo
-│   └── Sidebar.jsx      # Menu de navegação lateral
-├── pages/               # Páginas principais
-│   ├── Perfil.jsx       # Página do perfil do professor
-│   ├── AnaliseAlunos.jsx # Análise individual de alunos
-│   ├── AnaliseTurma.jsx  # Análise geral das turmas
-│   └── GerenciamentoProvas.jsx # Gerenciamento de provas
-├── data/                # Dados JSON simulados
-│   ├── alunos.json      # Dados dos estudantes
-│   ├── professores.json # Dados dos professores
-│   ├── turmas.json      # Informações das turmas
-│   ├── provas.json      # Provas agendadas
-│   ├── avisos.json      # Avisos e notificações
-│   ├── imgs/            # Fotos de perfil
-│   ├── analises/        # Gráficos de análise individual
-│   └── analises_turmas/ # Gráficos de análise de turmas
-└── App.jsx              # Componente principal
+```
+TrabFinal-EngSoftware/
+├── backend/                          # API Backend (FastAPI)
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── main.py                   # Entrada principal da API
+│   │   ├── database.py               # Configuração do banco de dados
+│   │   ├── models.py                 # Modelos SQLAlchemy
+│   │   ├── schemas.py                # Schemas Pydantic
+│   │   ├── crud.py                   # Operações CRUD
+│   │   └── routers/                  # Endpoints organizados por módulo
+│   │       ├── auth.py               # Autenticação e autorização
+│   │       ├── questions.py          # Gerenciamento de questões
+│   │       └── simulados.py          # Simulados e resultados
+│   ├── requirements.txt              # Dependências Python
+│   ├── simulador.db                  # Banco de dados SQLite
+│   └── README.md                     # Documentação do backend
+├── simulador_provas/                 # Frontend React
+│   ├── src/
+│   │   ├── App.jsx                   # Componente principal
+│   │   ├── main.jsx                  # Entrada da aplicação
+│   │   ├── components/               # Componentes React
+│   │   │   ├── LoginPage.jsx         # Página de login
+│   │   │   ├── SimuladoSelectionPage.jsx # Seleção de simulados
+│   │   │   ├── QuestionPage.jsx      # Interface do simulado
+│   │   │   └── HistoryPage.jsx       # Histórico de simulados
+│   │   ├── api/
+│   │   │   └── mockapi.js            # API mock para desenvolvimento
+│   │   └── assets/                   # Recursos estáticos
+│   ├── package.json                  # Dependências Node.js
+│   ├── vite.config.js               # Configuração do Vite
+│   └── README.md                    # Documentação do frontend
+├── docs/                            # Documentação do projeto
+│   └── qa/
+│       ├── plano-de-testes.md       # Plano de testes completo
+│       └── template-bug-report.md   # Template para bugs
+├── package.json                     # Configuração raiz
+└── README.md                        # Este arquivo
 ```
 
-## 🚀 Como Executar
+## 🚀 Como Executar o Projeto
 
 ### Pré-requisitos
-- Node.js (versão 16 ou superior)
+- Python 3.9+ 
+- Node.js 16+
 - npm ou yarn
 
-### Instalação
+### 1. Configuração do Backend
 
-1. Clone o repositório:
 ```bash
-git clone https://github.com/LK-DTR/TrabFinal-EngSoftware
-cd TrabFinal-EngSoftware
+# Navegue para a pasta do backend
+cd backend
+
+# Crie um ambiente virtual (recomendado)
+python -m venv venv
+
+# Ative o ambiente virtual
+# Windows:
+venv\Scripts\activate
+# Linux/Mac:
+source venv/bin/activate
+
+# Instale as dependências
+pip install -r requirements.txt
+
+# Execute o servidor da API
+uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-2. Instale as dependências:
+A API estará disponível em: `http://127.0.0.1:8000`
+- Documentação automática: `http://127.0.0.1:8000/docs`
+
+### 2. Configuração do Frontend
+
 ```bash
+# Em um novo terminal, navegue para a pasta do frontend
+cd simulador_provas
+
+# Instale as dependências
 npm install
-```
 
-3. Execute o projeto em modo de desenvolvimento:
-```bash
+# Execute o servidor de desenvolvimento
 npm run dev
 ```
 
-4. Acesse no navegador: `http://localhost:5173`
+A aplicação estará disponível em: `http://localhost:5173`
 
 ### Scripts Disponíveis
 
+#### Backend
 ```bash
-npm run dev     # Inicia o servidor de desenvolvimento
-npm run build   # Gera build de produção
-npm run lint    # Executa linting do código
-npm run preview # Visualiza o build de produção
+uvicorn app.main:app --reload    # Servidor de desenvolvimento
+python -m pytest                # Executar testes (quando implementados)
 ```
 
-## 🎯 Funcionalidades Detalhadas
-
-### Sistema de Perfis
-- Troca dinâmica entre diferentes professores usando o [`ProfileSelector`](src/components/ProfileSelector.jsx)
-- Dados persistentes por sessão através do estado do [`App.jsx`](src/App.jsx)
-
-### Visualização de Dados
-- **Fotos de perfil clicáveis**: Expansão em modal usando [`ImageModal`](src/components/ImageModal.jsx)
-- **Gráficos de análise**: Visualização de desempenho individual e por turma
-- **Cronograma dinâmico**: Exibição automática de horários e avisos no [`Calendario`](src/components/Calendario.jsx)
-
-### Gerenciamento de Provas
-- Agendamento de novas avaliações
-- Edição de provas existentes
-- Sistema de cancelamento com confirmação
-- Interface formulário dinâmica
-
-## 📊 Estrutura de Dados
-
-### Professores ([professores.json](src/data/professores.json))
-```json
-{
-  "id": 1,
-  "nome": "Nome do Professor",
-  "email": "email@utfpr.edu.br",
-  "foto_perfil": "foto.png",
-  "turmas_ids": [101, 102]
-}
+#### Frontend
+```bash
+npm run dev      # Servidor de desenvolvimento
+npm run build    # Build de produção
+npm run lint     # Linting do código
+npm run preview  # Preview do build
 ```
 
-### Turmas ([turmas.json](src/data/turmas.json))
-```json
-{
-  "id": 101,
-  "nome": "Engenharia de Software",
-  "curso": "Engenharia da Computação",
-  "periodo": "6º Período",
-  "horarios": [...],
-  "analise_geral": "turma-101-analise.png",
-  "aluno_ids": [201, 202, 205]
-}
-```
+## 🔌 API Endpoints
 
-## 🎨 Design e Interface
+### Autenticação
+- `POST /auth/token` - Login e geração de token JWT
+- `POST /auth/register` - Registro de novos usuários
 
-- **Tema escuro moderno** com cores principais: `#242424`, `#ffea00`, `#646cff`
-- **Layout responsivo** com sidebar fixa e conteúdo scrollável
-- **Componentes interativos** com hover effects e transições suaves
-- **Tipografia otimizada** para legibilidade em telas
+### Simulados
+- `GET /simulados` - Listar simulados disponíveis
+- `POST /simulados` - Criar novo simulado
+- `POST /simulados/{id}/submit` - Enviar respostas
+- `GET /simulados/{id}/result` - Obter resultado
 
-## 🔧 Configuração de Desenvolvimento
+### Questões
+- `GET /questions` - Listar questões
+- `POST /questions` - Criar nova questão
+- `PUT /questions/{id}` - Atualizar questão
+- `DELETE /questions/{id}` - Deletar questão
 
-O projeto utiliza:
-- **Vite** para build rápido e HMR
-- **ESLint** com configurações para React
-- **CSS Modules** para estilização isolada
-- **React Router** para navegação SPA
+## 💾 Banco de Dados
 
-## 📝 Próximos Passos
+### Modelos Principais
 
-- [ ] Infraestrutura
-- [ ] Testes Aturomatizados
+**User**
+- id, email, hashed_password, role (aluno/professor)
+
+**Question** 
+- id, question_text, options (JSON), correct_answer, subject
+
+**Simulado**
+- id, user_id, status, timestamp_inicio
+
+**Resultado**
+- id, simulado_id, score, answers (JSON), timestamp_fim
+
+## 🎨 Interface do Usuário
+
+### Características do Design
+- **Interface moderna** com Chakra UI
+- **Tema azul corporativo** (`blue.800`, `blue.600`)
+- **Layout responsivo** adaptável a mobile e desktop
+- **Feedback visual** com toasts e loading states
+- **Navegação intuitiva** com sidebar fixa
+
+### Componentes Principais
+- **LoginPage**: Autenticação com validação
+- **SimuladoSelectionPage**: Lista e filtros de simulados
+- **QuestionPage**: Interface do simulado com cronômetro
+- **HistoryPage**: Histórico detalhado de resultados
+
+## 🧪 Testes e Qualidade
+
+O projeto inclui um plano de testes abrangente localizado em `docs/qa/plano-de-testes.md` que cobre:
+
+### Tipos de Teste
+- ✅ Testes Funcionais
+- ✅ Testes de Interface de Usuário  
+- ✅ Testes de API
+- ✅ Testes de Performance
+- ✅ Testes de Segurança
+- ✅ Testes de Responsividade
+
+### Histórias de Usuário Cobertas
+- **HU1**: Como aluno, quero realizar simulados por matéria
+- **HU2**: Como aluno, quero visualizar relatório de desempenho detalhado
+- **HU3**: Como professor, quero acessar dashboard consolidado
+
+### Critérios de Performance
+- ⚡ Carregamento inicial: < 3 segundos
+- ⚡ Geração de relatórios: < 3 segundos  
+- ⚡ Correção automática: < 1 segundo
+
+## 🔐 Segurança
+
+- **Autenticação JWT** com tokens seguros
+- **Hash de senhas** com bcrypt via Passlib
+- **Validação de dados** com Pydantic
+- **Proteção de rotas** no frontend e backend
+- **CORS configurado** para desenvolvimento
+
+## 📱 Funcionalidades Detalhadas
+
+### Sistema de Simulados
+- **Filtros avançados**: Por instituição, disciplina e dificuldade
+- **Cronômetro inteligente**: Finalização automática quando o tempo acaba
+- **Navegação livre**: Entre questões durante o simulado
+- **Persistência**: Respostas salvas durante a navegação
+
+### Relatórios de Desempenho
+- **Estatísticas detalhadas**: Acertos, erros, tempo gasto
+- **Histórico completo**: Todos os simulados realizados
+- **Métricas visuais**: Pontuação e progresso
+
+### Gerenciamento de Questões
+- **CRUD completo**: Criar, listar, editar e deletar
+- **Múltipla escolha**: Suporte a 5 alternativas por questão
+- **Categorização**: Por matéria e dificuldade
+
+## 🚧 Próximos Passos
+
+### Sprint 3 - Funcionalidades Avançadas
+- [ ] Dashboard completo do professor
+- [ ] Relatórios gráficos com Chart.js
+- [ ] Sistema de recomendações personalizadas
+- [ ] Exportação de relatórios em PDF
+
+### Sprint 4 - Qualidade e Deploy
+- [ ] Testes automatizados com Jest/Pytest
+- [ ] CI/CD com GitHub Actions
+- [ ] Deploy em produção (Heroku/Vercel)
+- [ ] Documentação completa da API
+
+### Melhorias Futuras
+- [ ] Integração com APIs externas de questões
+- [ ] Sistema de notificações push
+- [ ] Modo offline para simulados
+- [ ] Análise de desempenho com IA
+
+## 👥 Contribuindo
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## � Suporte
+
+Em caso de dúvidas ou problemas:
+- Verifique a documentação em `backend/README.md`
+- Consulte o plano de testes em `docs/qa/plano-de-testes.md`
+- Use o template de bug em `docs/qa/template-bug-report.md`
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT. Consulte o arquivo `LICENSE` para mais detalhes!
+Este projeto está sob a licença MIT. Consulte o arquivo `LICENSE` para mais detalhes.
